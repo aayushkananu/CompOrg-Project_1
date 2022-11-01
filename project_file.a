@@ -38,3 +38,10 @@ bge $s2, 82, counter
 sub $s2, $s2, 54
 add $s3, $s3, $s2
 j counter
+
+# for the lowercase character r
+lowercaseR:
+bge $s2, 114, counter # for the letter r
+sub $s2, $s2, 86
+add $s3, $s3, $s2
+j counter
