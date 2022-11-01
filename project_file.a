@@ -31,3 +31,10 @@ counter:
 addi $t3, $t3, 1
 lb $s2,($t3)
 j verify
+
+# uppercase character R
+uppercaseR:
+bge $s2, 82, counter
+sub $s2, $s2, 54
+add $s3, $s3, $s2
+j counter
