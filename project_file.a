@@ -1,0 +1,67 @@
+.data
+
+input: .space 11 # user input
+enter: .asciiz "\n"
+.text
+
+main:
+li $v0, 8
+la $a0, input
+li $a1, 11
+syscall
+
+enterInput:
+move $t3, $a0
+lb $s2, ($t3)
+
+# check values
+verify:
+beq $t0, 10, output
+
+sort_values:
+addi $t0, $t0, 1
+bge $s2, 97, lowercaseI # lowercase 
+bge $s2, 65, uppercaseI # uppercase 
+bge $s2, 48, numbers # for number 0
+
+# creating a function
+counter:
+addi $t3, $t3, 1
+lb $s2,($t3)
+j verify
+
+# uppercase character I
+uppercaseI:
+bge $s2, 73, counter # for letter i
+sub $s2, $s2, 43
+add $s3, $s3, $s2
+j counter
+
+# for the lowercase character i
+lowercaseI:
+bge $s2, 105, counter # for letter i
+sub $s2, $s2, 75
+add $s3, $s3, $s2
+j counter
+
+numbers:
+bge $s2, 58, counter
+sub $s2, $s2, 48
+add $s3, $s3, $s2
+j counter
+
+output:
+li $v0, 4
+la $a0, enter
+syscall
+
+addi $t5,$zero,3
+li $v0, 1
+mul $s3, $s3, $t5
+move $a0, $s3
+syscall
+
+li $v0, 10
+syscall
+
+# program must exit afterwards
