@@ -19,3 +19,4 @@ lb $s2, ($t3)
 # check values
 verify:
 beq $t0, 10, output
+
